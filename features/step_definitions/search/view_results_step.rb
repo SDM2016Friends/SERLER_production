@@ -41,7 +41,9 @@ end
 
 When(/^I type specific keywords and click search button at vr case$/) do
   fill_in 'search[search_fields_attributes][0][content]', with: 'Agile'
-  click_button 'Search'
+  within(".button-group") do
+    click_button 'Search'
+  end
 end
 
 Then(/^I should get specific results and I can view them in a tabular format at vr case$/) do
