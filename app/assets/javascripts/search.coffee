@@ -1,32 +1,25 @@
 ready = ->
   $("a[data-sort]").click (event)->
-      sort_column(event.target)
+    sort_column(event.target)
 
   $("a[data-action]").click (event)->
-      save_search()
-      return
+    save_search()
+    return
 
   $("button[data-modal]").click (event)->
-      $("#save_search_modal").on 'show.bs.modal', ()->
-        $("#save_search_modal input").focus()
-        return
+    $("#save_search_modal").on 'show.bs.modal', ()->
+      $("#save_search_modal input").focus()
       return
+    return
 
   $("#search_form").on 'submit', (event)->
-      data_action = $("button[data-action]")
-      if data_action == "save"
-        save_search()
-        #export_results()
-      else
-        validateForm()
-      return
-
-  change_column = (value, checked)->
-    header = $(".#{value}_header")
-    if checked
-      header.show()
+    data_action = $("button[data-action]")
+    if data_action == "save"
+      save_search()
+      #export_results()
     else
-      header.hide()
+      validateForm()
+    return
 
   $("#columns_select").multiselect({
     buttonWidth: "200px"
@@ -36,17 +29,26 @@ ready = ->
       change_column(value, checked)
   })
 
+  change_column = (value, checked)->
+    header = $("##{value}_header")
+    if checked
+      header.show()
+    else
+      header.hide()
+    return
+
+
   jsDoc = jsPDF('l', 'pt')
 
   export_pdf = () ->
     tableElement = document.getElementById('results_table')
     res = jsDoc.autoTableHtmlToJson(tableElement)
     jsDoc.autoTable(res.columns, res.data, {
-      theme: "plain"
+      theme: "grid"
       tableWidth: 'auto'
       startY: 60
       style: {
-        rowHeight: 50
+        rowHeight: 100
       }
     })
     jsDoc.save('export.pdf')
@@ -93,7 +95,6 @@ ready = ->
     direction_input.appendTo(form)
     return $("#search_form").submit()
 
-
 	validateForm = ->
 		ret_val = true
 		search_option_list = $('.search_field_option')
@@ -117,6 +118,8 @@ ready = ->
 			$('#invalid_pop').modal()
 		ret_val
 		return
+
+  return
 
 $(document).ready ready
 $(document).on "page:load", ready
