@@ -1,30 +1,29 @@
 
 <h4>Search Result: <%= @results.count if @result%> </h4>
-
 <table class="table">
   <thead>
     <tr>
-      <td class="title_header"><%= sort_link "Title", "title" %></td>
-      <td class="name_header"><%= sort_link "Authors", "name" %></td>
-      <td class="year_header"><%= sort_link "Year", "year" %></td>
-      <td class="source_title_header"><%= sort_link "Source", "source_title" %></td>
-      <td class="research_aim_header"><%= sort_link "Research Aim", "research_aim"%></td>
-      <td class="publisher_header"><%= sort_link "Publisher", "publisher"%></td>
-      <td class="published_time_header"><%= sort_link "Published At", "published_time"%></td>
-      <td class="doi_header"><%= sort_link "DOI", "doi"%></td>
+      <td><%= sort_link "Title", "title" %></td>
+      <td><%= sort_link "Authors", "name" %></td>
+      <td><%= sort_link "Year", "year" %></td>
+      <td><%= sort_link "Source", "source_title" %></td>
+      <td><%= sort_link "Research Aim", "research_aim"%></td>
+      <td><%= sort_link "Publisher", "publisher"%></td>
+      <td><%= sort_link "Published At", "published_time"%></td>
+      <td><%= sort_link "DOI", "doi"%></td>
     </tr>
   </thead>
   <tbody>
     <% @results.each_with_index do |evidence, index| %>
       <tr>
-        <td class="title_header"> <%= evidence.title %> </td>
-        <td class="name_header"> <%= evidence.authors %>  </td>
-        <td class="year_header"> <%= evidence.year %> </td>
-        <td class="source_title_header"> <%= evidence.source_title %>  </td>
-        <td class="research_aim_header"> <%= evidence.research_aim %> </td>
-        <td class="publisher_header"> <%= evidence.publisher %> </td>
-        <td class="published_time_header"> <%= evidence.published_time.strftime("%v") %> </td>
-        <td class="doi_header"> <%= evidence.DOI %> </td>
+        <td> <%= evidence.title %> </td>
+        <td> <%= evidence.authors %>  </td>
+        <td> <%= evidence.year %> </td>
+        <td> <%= evidence.source_title %>  </td>
+        <td> <%= evidence.research_aim %> </td>
+        <td> <%= evidence.publisher %> </td>
+        <td> <%= evidence.published_time.strftime("%v") %> </td>
+        <td> <%= evidence.DOI %> </td>
       </tr>
     <% end %>
   </tbody>
