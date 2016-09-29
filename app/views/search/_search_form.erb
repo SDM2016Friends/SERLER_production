@@ -63,7 +63,6 @@
                     </div>
 
                     <div class="columns-select">
-
                       <select multiple="multiple" id="columns_select" name="columns_select">
                         <option value="title" selected="selected">Title</option>
                         <option value="name"  selected="selected">Authors</option>
@@ -76,13 +75,16 @@
                       </select>
                     </div>
 
+                    <div class="export-pdf">
+                      <button class="btn btn-danger btn-small" id="export_pdf">Export</button>
+                    </div>
                     <div class="container">
                       <div class="row results">
                         <div class="left col-sm-2 col-md-2">
                           <%= render 'left_search_form', f: f %>
                         </div>
                         <div class="right col-sm-10 col-md-10">
-                          <div class="table-responsive">
+                          <div class="table-responsive" >
                             <%= render 'results' if @results%>
                           </div>
                         </div>
