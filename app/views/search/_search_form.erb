@@ -62,19 +62,6 @@
                       <%= link_to "Search History", search_history_path,:id=>'search_history' %>
                     </div>
 
-                    <div class="columns-select">
-
-                      <select multiple="multiple" id="columns_select" name="columns_select">
-                        <option value="title" selected="selected">Title</option>
-                        <option value="name"  selected="selected">Authors</option>
-                        <option value="year" selected="selected">Year</option>
-                        <option value="source_title" selected="selected">Source</option>
-                        <option value="research_aim" selected="selected">Research Aim</option>
-                        <option value="publisher" selected="selected">Publisher</option>
-                        <option value="published_time" selected="selected">Published At</option>
-                        <option value="doi" selected="selected">DOI</option>
-                      </select>
-                    </div>
 
                     <div class="container">
                       <div class="row results">
@@ -89,7 +76,7 @@
                       </div>
                     </div>
                     <%= render 'save_search', f: f %>
-                  <% end %>
+                    <% end %>
 
 
-                  <%= render 'popup'%>
+                    <%= render 'popup'%>

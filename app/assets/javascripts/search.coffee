@@ -21,22 +21,6 @@ ready = ->
         validateForm()
       return
 
-  change_column = (value, checked)->
-    header = $(".#{value}_header")
-    if checked
-      header.show()
-    else
-      header.hide()
-
-  $("#columns_select").multiselect({
-    buttonWidth: "200px"
-    numberDisplayed: 1
-    onChange: (option, checked, select)->
-      value = $(option).val()
-      change_column(value, checked)
-  })
-
-
 
   datetime_mode =
     viewMode: 'days'
