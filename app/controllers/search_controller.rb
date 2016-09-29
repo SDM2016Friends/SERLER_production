@@ -31,6 +31,10 @@ class SearchController < ApplicationController
   def show
   end
 
+  def export
+
+  end
+
   private
   def search_params
     if params.include?(:search)

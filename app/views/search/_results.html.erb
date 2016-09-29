@@ -1,7 +1,7 @@
 
-<h4>Search Result: <%= @results.count if @result%> </h4>
+<h4>Search Result: <%= @results.count if @results%> </h4>
 
-<table class="table">
+<table id="results_table" class="table">
   <thead>
     <tr>
       <td class="title_header"><%= sort_link "Title", "title" %></td>
@@ -29,3 +29,4 @@
     <% end %>
   </tbody>
 </table>
+<div id="editor"></div>

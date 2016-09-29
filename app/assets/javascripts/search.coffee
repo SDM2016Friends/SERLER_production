@@ -36,7 +36,23 @@ ready = ->
       change_column(value, checked)
   })
 
+  jsDoc = jsPDF('l', 'pt')
 
+  export_pdf = () ->
+    tableElement = document.getElementById('results_table')
+    res = jsDoc.autoTableHtmlToJson(tableElement)
+    jsDoc.autoTable(res.columns, res.data, {
+      theme: "plain"
+      tableWidth: 'auto'
+      startY: 60
+      style: {
+        rowHeight: 50
+      }
+    })
+    jsDoc.save('export.pdf')
+
+  $('#export_pdf').click ()->
+    export_pdf()
 
   datetime_mode =
     viewMode: 'days'
