@@ -1,7 +1,7 @@
 class SearchController < ApplicationController
   helper_method :sort_column, :sort_direction
-  before_action :set_search, only: [:index]
-  before_action :set_search_conditions, only: [:show]
+  #before_action :set_search, only: [:index]
+  before_action :set_search_conditions, only: [:index, :show]
 
   def index
   end
@@ -28,10 +28,6 @@ class SearchController < ApplicationController
   end
 
   def show
-  end
-
-  def export
-
   end
 
   private
@@ -73,7 +69,11 @@ class SearchController < ApplicationController
       @search = Search.new(search_params)
 
       if(@search.search_fields.blank?)
-        @search.search_fields.build(search_params[:search_fields_attributes][0])
+        if search_params[:search_fields_attributes]
+          @search.search_fields.build(search_params[:search_fields_attributes][0])
+        else
+          @search.search_fields.build()
+        end
       end
     end
 
