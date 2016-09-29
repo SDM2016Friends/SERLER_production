@@ -37,7 +37,6 @@ ready = ->
       header.hide()
     return
 
-
   jsDoc = jsPDF('l', 'pt')
 
   export_pdf = () ->
@@ -93,7 +92,8 @@ ready = ->
     direction_input = $("<input>").attr("type", "hidden").attr("name", "direction").val($(obj).attr("data-direction"))
     sort_input.appendTo(form)
     direction_input.appendTo(form)
-    return $("#search_form").submit()
+    $("#search_form").submit()
+    return
 
 	validateForm = ->
 		ret_val = true
@@ -122,7 +122,7 @@ ready = ->
   return
 
 $(document).ready ready
-$(document).on "page:load", ready
+$(document).on "turbolinks:load", ready
 $(document).on 'nested:fieldAdded', (event) ->
   # this field was just inserted into your form
   field = event.field

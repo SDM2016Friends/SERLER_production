@@ -19,6 +19,7 @@
 //= require bootstrap-datetimepicker
 //= require search
 //= require browse
+//= require bootstrap
 //= require jquery.infinitescroll
 //= require bootstrap-multiselect
 //= require jspdf.min
