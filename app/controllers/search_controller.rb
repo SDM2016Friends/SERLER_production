@@ -72,7 +72,7 @@ class SearchController < ApplicationController
         if search_params[:search_fields_attributes]
           @search.search_fields.build(search_params[:search_fields_attributes][0])
         else
-          @search.search_fields.build()
+          @search.search_fields.build({op1: "", field: "", op2:"", content:""})
         end
       end
     end
