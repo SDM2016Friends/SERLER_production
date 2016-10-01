@@ -17,6 +17,6 @@ Then(/^When I I click 'Search History', I am on history page and can see the ite
 end
 
 Then(/^I click 'Excute Search' and get the result$/) do
-  click_link 'Execute Search'
+  page.find(:css, "tr:first-child .btn").click
   expect(page).to have_content('How')
 end
