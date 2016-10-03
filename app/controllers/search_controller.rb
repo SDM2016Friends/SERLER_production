@@ -1,8 +1,7 @@
 class SearchController < ApplicationController
   helper_method :sort_column, :sort_direction
-  before_action :set_search, only: [:index]
-  before_action :set_search_conditions, only: [:show]
-  skip_before_action :authenticate_user!
+  #before_action :set_search, only: [:index]
+  before_action :set_search_conditions, only: [:index, :show]
 
   def index
   end
@@ -37,7 +36,7 @@ class SearchController < ApplicationController
       params.require(:search).permit(:id, :from_date, :to_date, :name, :saved_on,
                                      :search_fields_attributes => [:content,:field,:op1,:op2,:_destroy]);
     else
-      params.permit(:id)
+      params.permit(:search).permit(:id)
     end
   end
 
@@ -53,8 +52,6 @@ class SearchController < ApplicationController
         @search.search_fields.build(search_params[:search_fields_attributes][0])
       end
 
-      #search_scope = make_query params
-      #@results = search_scope.call(EvidenceSource)
       set_search_conditions
     else
       @search = Search.new
@@ -70,6 +67,14 @@ class SearchController < ApplicationController
       @search = Search.find(search_params[:id])
     else
       @search = Search.new(search_params)
+
+      if(@search.search_fields.blank?)
+        if search_params[:search_fields_attributes]
+          @search.search_fields.build(search_params[:search_fields_attributes][0])
+        else
+          @search.search_fields.build({op1: "", field: "", op2:"", content:""})
+        end
+      end
     end
 
     query_string = ""
@@ -115,45 +120,6 @@ class SearchController < ApplicationController
 
   def sort_direction
     %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
-  end
-
-  #make query string for PG
-  def make_query params
-    query_string = String.new
-    query_author = false
-    #Geting Date
-
-    items = params[:search][:search_fields_attributes].values
-    items.each do |search_field|
-      unless search_field[:content].blank?
-        field = search_field[:field]
-        query_string << "#{search_field[:op1]} " unless query_string.blank?
-        query_string << "#{field} "
-        query_string << "#{search_field[:op2]} "
-
-        query_author = true if field == "name" or field == "name_abbr"
-
-        if search_field[:op2] == "=" || search_field[:op2] == ">" || search_field[:op2] == "<"
-          query_string << "'#{search_field[:content]}' "
-        else
-          query_string << "'%#{search_field[:content]}%' "
-        end
-      end
-    end
-
-    unless params[:search][:from_date].blank?
-      query_string << "AND " unless query_string.blank?
-      query_string << "published_time >= "
-      query_string << "'#{params[:search][:from_date]}' "
-    end
-
-    unless params[:search][:to_date].blank?
-      query_string << "AND " unless query_string.blank?
-      query_string << "published_time <= "
-      query_string << "'#{params[:search][:to_date]}' "
-    end
-
-    search_scope(query_string, query_author)
   end
 
   def search_scope(query_string, query_author=false)

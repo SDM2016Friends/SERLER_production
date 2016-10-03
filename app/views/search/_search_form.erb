@@ -55,15 +55,13 @@
                     <div class="button-group">
                       <%= f.link_to_add "Add a Field", :search_fields,:class => 'btn btn-info btn-sm' %>
                       <%= f.submit "Search", class: "btn btn-info btn-sm" %>
-                      <%= link_to "Clear", search_index_path, class: "btn btn-default btn-sm" %>
-                      <button type="button" class="btn btn-primary btn-sm" id="save_search_btn"data-toggle="modal" data-target="#save_search_modal">
+                      <button type="button" id="save_search_btn" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#save_search_modal">
                         Save Search
                       </button>
                       <%= link_to "Search History", search_history_path,:id=>'search_history' %>
                     </div>
 
                     <div class="columns-select">
-
                       <select multiple="multiple" id="columns_select" name="columns_select">
                         <option value="title" selected="selected">Title</option>
                         <option value="name"  selected="selected">Authors</option>
@@ -76,13 +74,16 @@
                       </select>
                     </div>
 
+                    <div class="export-pdf">
+                      <button class="btn btn-danger btn-small" id="export_pdf">Export</button>
+                    </div>
                     <div class="container">
                       <div class="row results">
                         <div class="left col-sm-2 col-md-2">
                           <%= render 'left_search_form', f: f %>
                         </div>
                         <div class="right col-sm-10 col-md-10">
-                          <div class="table-responsive">
+                          <div class="table-responsive" >
                             <%= render 'results' if @results%>
                           </div>
                         </div>
