@@ -7,7 +7,10 @@ Given(/^I'm logged in as a user on select_column case$/) do
   @user = User.create!({
                            email: 'admin@admin.com',
                            password: '12345678',
-                           password_confirmation: '12345678'
+                           password_confirmation: '12345678',
+                           first_name: 'Good',
+                           middle_name: 'Profect',
+                           last_name: 'Excellent'
                        })
   @user.save!
   visit new_user_session_path
