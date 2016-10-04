@@ -7,7 +7,8 @@ RSpec.describe "browse/index.html.erb", type: :view do
         email: "user@example.com", password: "123456", password_confirmation: "123456",
         reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1,
         current_sign_in_at: "2015-02-06 14:02:10", last_sign_in_at: "2015-02-06 14:02:10",
-        current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1"
+        current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", first_name: "Good", middle_name: "Profect",
+        last_name: "Excellent"
       }
     )
     EvidenceSource.create!(
