@@ -9,5 +9,5 @@ Then(/^I input the email address and click 'Share' button$/) do
 end
 
 Then(/^The search results should be shared by email$/) do
-  ？？
+  expect(page).to have_content("Successful!!")
 end
