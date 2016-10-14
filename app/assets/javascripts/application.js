@@ -21,5 +21,3 @@
 //= require browse
 //= require jquery.infinitescroll
 //= require bootstrap-multiselect
-//= require jspdf.min
-//= require jspdf.plugin.autotable
