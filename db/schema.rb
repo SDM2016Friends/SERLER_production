@@ -252,7 +252,7 @@ ActiveRecord::Schema.define(version: 20160927063911) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.integer "roles_mask", default: 0
+    t.integer  "roles_mask",             default: 0
     t.text     "first_name"
     t.text     "middle_name"
     t.text     "last_name"
