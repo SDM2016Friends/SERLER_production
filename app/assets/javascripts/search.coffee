@@ -37,23 +37,15 @@ ready = ->
       header.hide()
     return
 
-  jsDoc = jsPDF('l', 'pt')
+  export_csv = () ->
+    change_form_get()
+    form = $("#search_form")
+    form.attr("action","/search.csv")
+    form.submit()
 
-  export_pdf = () ->
-    tableElement = document.getElementById('results_table')
-    res = jsDoc.autoTableHtmlToJson(tableElement)
-    jsDoc.autoTable(res.columns, res.data, {
-      theme: "grid"
-      tableWidth: 'auto'
-      startY: 60
-      style: {
-        rowHeight: 100
-      }
-    })
-    jsDoc.save('export.pdf')
+  $('#export_csv').click ()->
+    export_csv()
 
-  $('#export_pdf').click ()->
-    export_pdf()
 
   datetime_mode =
     viewMode: 'days'

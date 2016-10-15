@@ -23,6 +23,11 @@ RSpec.describe SearchController, type: :controller do
       get :index, params:{ "search"=>{"search_fields_attributes"=>{"0"=>{"field"=>"title", "op2"=>"ILIKE", "content"=>"how"}}},"commit"=>"Search"}
       expect(response).to render_template("index")
     end
+
+    it "response content type corrected" do
+      get :index, format: :csv
+      expect(response.content_type).to eq("application/octet-stream")
+    end
   end
 
   describe "GET #show" do

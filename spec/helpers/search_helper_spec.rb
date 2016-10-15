@@ -11,5 +11,27 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe SearchHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before do
+    controller.singleton_class.class_eval do
+      protected
+      def sort_column
+        "title"
+      end
+
+      def sort_direction
+        "desc"
+      end
+
+      helper_method :sort_column, :sort_direction
+    end
+  end
+
+  describe "#sort_link" do
+    it "returns proper link" do
+      title = "Title"
+      column = "title"
+      expected = "data-sort=\"title\" data-direction=\"asc\" class=\"current desc\""
+      expect(helper.sort_link(title, column)).to include(expected)
+    end
+  end
 end

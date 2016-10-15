@@ -4,6 +4,10 @@ class SearchController < ApplicationController
   before_action :set_search_conditions, only: [:index, :show]
 
   def index
+    respond_to do |format|
+      format.html
+      format.csv { send_data to_csv(@results) }
+    end
   end
 
   def create
@@ -131,5 +135,15 @@ class SearchController < ApplicationController
     else
       -> (model) { model.where(query_string).order(hash)}
     end
+  end
+
+  def to_csv(results, options={})
+    CSV.generate(options) do |csv|
+      csv << ["Title","Authors","Year", "Source Title", "Research Aim", "Publisher", "Published Time", "DOI"]
+      results.each do |evi|
+        csv << [evi.title, evi.authors, evi.year, evi.source_title, evi.research_aim, evi.publisher,evi.published_time, evi.DOI]
+      end
+    end
+
   end
 end
