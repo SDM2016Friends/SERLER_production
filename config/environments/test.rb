@@ -50,7 +50,7 @@ Rails.application.configure do
     :port                 => 994,
     :openssl_verify_mode => 'none',
     :user_name            => 'sdm2016friends',
-    :password             => '2016Sdm2016',
+    :password             => 'Sdm2016abc',
     :authentication       => 'plain',
     :enable_starttls_auto => true,
     :ssl                  => true
