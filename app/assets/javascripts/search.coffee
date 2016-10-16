@@ -129,3 +129,25 @@ $(document).on 'nested:fieldRemoved', (event) ->
   # it's a jQuery object already! Now you can find date input
   event.target.remove()
   return
+
+$(document).on 'click', '#btn-share', ->
+  _shared_search_id = 0
+  console.log 'email'
+  email = $('#input-email-address').val()
+  console.log email
+  # TODO check
+  # if check failed, add class to the input-field
+  $.ajax
+    url: '/share/share_results_email'
+    type: 'GET'
+    data:
+      'search_id': _shared_search_id
+      'email': email
+    success: ->
+      alert 'Share succeeded!'
+      $('#share-box').modal false
+      return
+    error: ->
+      alert 'Share failed!'
+      return
+  return
