@@ -2,20 +2,20 @@ ready = ->
   $("a[data-sort]").click (event)->
     sort_column(event.target)
 
-  $("a[data-action]").click (event)->
-    save_search()
-    return
 
-  $("button[data-modal]").click (event)->
-    $("#save_search_modal").on 'show.bs.modal', ()->
-      $("#save_search_modal input").focus()
-      return
-    return
+  #$("#save_search_link").click (event)->
+    #return
+
+  #$("button[data-modal]").click (event)->
+    #$("#save_search_modal").on 'show.bs.modal', ()->
+      #$("#save_search_modal input").focus()
+      #return
+    #return
 
   $("#search_form").on 'submit', (event)->
     data_action = $("button[data-action]")
     if data_action == "save"
-      save_search()
+      #save_search()
       #export_results()
     else
       validateForm()
@@ -63,17 +63,6 @@ ready = ->
     form.attr("method", "get")
     return
 
-  save_search = ()->
-    form = $("#search_form")
-    change_form_post()
-    posting = $.post("/search", form.serialize())
-    posting.done (data)->
-        alert("Search Saved")
-    posting.fail ()->
-        alert("Search Save Failed")
-    posting.always ()->
-        change_form_get()
-    return
 
   export_results = (obj)->
     return
@@ -113,8 +102,22 @@ ready = ->
 
   return
 
+save_search = ()->
+  form = $("#search_form")
+  posting = $.post("/search", form.serialize())
+  posting.done (data)->
+      alert("Search Saved")
+  posting.fail ()->
+      alert("Search Save Failed")
+  return
+
 $(document).ready ready
 $(document).on "turbolinks:load", ready
+
+$(document).on 'click', '#save_search_link',()->
+  save_search()
+  return
+
 $(document).on 'nested:fieldAdded', (event) ->
   # this field was just inserted into your form
   field = event.field
@@ -125,4 +128,26 @@ $(document).on 'nested:fieldRemoved', (event) ->
   field = event.field
   # it's a jQuery object already! Now you can find date input
   event.target.remove()
+  return
+
+$(document).on 'click', '#btn-share', ->
+  _shared_search_id = 0
+  console.log 'email'
+  email = $('#input-email-address').val()
+  console.log email
+  # TODO check
+  # if check failed, add class to the input-field
+  $.ajax
+    url: '/share/share_results_email'
+    type: 'GET'
+    data:
+      'search_id': _shared_search_id
+      'email': email
+    success: ->
+      alert 'Share succeeded!'
+      $('#share-box').modal false
+      return
+    error: ->
+      alert 'Share failed!'
+      return
   return

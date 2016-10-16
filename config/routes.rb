@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   get "search/history"
   resources :search do
   end
+  
+  get 'share/share_results_email'
 
   resources :methodologies
   resources :se_methods

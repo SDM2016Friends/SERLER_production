@@ -26,11 +26,57 @@
               <%= search.created_at.strftime("%v") %>
             </td>
             <td>
-              <%= link_to "Execute Search", search_path(search), :class => "btn btn-primary btn-sm" %>
+              <%= link_to "Execute Search", search_path(search), :class => "execute-search btn btn-primary btn-sm" %>
+              &nbsp;&nbsp;
+              <button id="btn-share-<%= search.id %>" data-serler-search-id="<%= search.id %>" class="btn btn-warning btn-sm" >Share</button>
             </td>
           </tr>
         <% end %>
+        <script>
+          $().ready(function(){
+            $('[id^=btn-share-]').click(function(){
+              console.log("xxxxxxx");
+              var sid =  $(this).data('serler-search-id');
+              _shared_search_id = sid;
+              console.log(sid);
+              $('#share-box').modal();
+              return false;
+            });
+          });
+        </script>
       </tbody>
     </table>
   </div>
 </div>
+
+<!-- -->
+<div class="modal fade" id="share-box" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">share search</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form" accept-charset="utf-8">
+          <div class="form-group">
+            <label class="control-label" for="input-email-address">email</label>
+            <input class="form-control" type="email" id="input-email-address">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+        <div class="row">
+          <div class="col-sm-6">
+            <button class="btn btn-success btn-block" id="btn-share">Share</button>
+          </div>
+          <div class="col-sm-6">
+            <button class="btn btn-default btn-block" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
