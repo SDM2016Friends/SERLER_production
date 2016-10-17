@@ -45,11 +45,11 @@ Rails.application.configure do
   #   :ssl                  => true
   # }
   config.action_mailer.smtp_settings = {
-    :address              => "smtp.sendgrid.net",
+    :address              => "smtp.mailgun.org",
     :port                 => 2525,
-    :user_name            => 'apikey',
-    # :domain               => 'sdm2016_',
-    :password             => 'SG.W2JyOAgbSDOw9dL0x4iGOw.EKZ4z5tmDmDqqCKTBEDlcoWPSCqtHkWZwoOlQGCBXmos',
+    :user_name            => 'postmaster@sandbox131de16fd9b4465f89aee0a83ed26e15.mailgun.org',
+    :domain               => 'sandbox131de16fd9b4465f89aee0a83ed26e15.mailgun.org',
+    :password             => '46e4da68a444252e59ab90f559521703',
     :authentication       => 'plain',
     :enable_starttls_auto => true
   }
