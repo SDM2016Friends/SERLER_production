@@ -132,9 +132,8 @@ $(document).on 'nested:fieldRemoved', (event) ->
 
 $(document).on 'click', '#btn-share', ->
   _shared_search_id = 0
-  console.log 'email'
   email = $('#input-email-address').val()
-  console.log email
+  $('#btn-share').attr 'disabled', true
   # TODO check
   # if check failed, add class to the input-field
   $.ajax
@@ -146,8 +145,10 @@ $(document).on 'click', '#btn-share', ->
     success: ->
       alert 'Share succeeded!'
       $('#share-box').modal false
+      $('#btn-share').attr 'disabled', false
       return
     error: ->
       alert 'Share failed!'
+      $('#btn-share').attr 'disabled', false
       return
   return

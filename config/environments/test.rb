@@ -46,13 +46,12 @@ Rails.application.configure do
   config.action_mailer.perform_caching = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address              => "smtp.163.com",
-    :port                 => 994,
-    :openssl_verify_mode => 'none',
-    :user_name            => 'sdm2016friends',
-    :password             => 'Sdm2016abc',
+    :address              => "smtp.mailgun.org",
+    :port                 => 2525,
+    :user_name            => 'postmaster@sandbox131de16fd9b4465f89aee0a83ed26e15.mailgun.org',
+    :domain               => 'sandbox131de16fd9b4465f89aee0a83ed26e15.mailgun.org',
+    :password             => '46e4da68a444252e59ab90f559521703',
     :authentication       => 'plain',
-    :enable_starttls_auto => true,
-    :ssl                  => true
+    :enable_starttls_auto => true
   }
 end
